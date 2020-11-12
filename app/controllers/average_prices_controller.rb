@@ -16,9 +16,10 @@ class AveragePricesController < ApplicationController
   # POST /average_prices
   def create
     @average_price = AveragePrice.new(average_price_params)
+    @average_price.stock_id = params[:stock_id]
 
     if @average_price.save
-      render json: @average_price, status: :created, location: @average_price
+      render json: @average_price, status: :created
     else
       render json: @average_price.errors, status: :unprocessable_entity
     end
