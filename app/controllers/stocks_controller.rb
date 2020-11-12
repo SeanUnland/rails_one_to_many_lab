@@ -5,13 +5,12 @@ class StocksController < ApplicationController
   def index
     @stocks = Stock.all
 
-    render json: @stocks
+    render json: @stocks.to_json(include: :average_prices)
   end
 
   # GET /stocks/1
   def show
-    stock_prices = @stock.average_prices
-    render json: { stock: @stock, average_prices: stock_prices}
+    render json: @stock.to_json(include: :average_prices)
   end
 
   # # POST /stocks
